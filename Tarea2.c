@@ -4,11 +4,11 @@
 #include <time.h>
 #include <math.h>
 
-// 1.- Definir variables globles
+// 1.- DEFINIR VARIABLES GLOBALES
 int arreglo[100000];
 int v = 100000;
 
-//2.- Llenar el arreglo
+//2.- LLENAR EL ARREGLO
 void valor_arreglo (int arreglo[])
 { 
  int c;
