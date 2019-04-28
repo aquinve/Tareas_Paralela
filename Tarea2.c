@@ -22,7 +22,7 @@ void valor_arreglo (int arreglo[])
 } //END VOID
 //---------------------------------------------------------------------------------
 
-//A. CALCULO DE PROMEDIO
+//3.- CALCULO PROMEDIO
 
 float promedio_arreglo (int arreglo[])
 {	
@@ -36,7 +36,7 @@ float promedio_arreglo (int arreglo[])
 
 //---------------------------------------------------------------------------------
 
-//B. CALCULO DE VARIANZA
+//4.- CALCULO VARIANZA
 
  float varianza_arreglo (int arreglo[], float promedio ) 
 {
@@ -52,7 +52,7 @@ float promedio_arreglo (int arreglo[])
 
 //---------------------------------------------------------------------------------
 
-//C. Definiciones, calculos y muestras por pantalla
+//5.- DEFINICIONES, CALCULOS Y MUESTRAS POR PANTALLA
 
 int main ()
 {
