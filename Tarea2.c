@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+//Autor: Amada Quinteros V.
+
+#include <stdio.h> 
 #include <time.h>
 #include <math.h>
 
