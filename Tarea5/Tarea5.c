@@ -21,14 +21,7 @@
 #define XML_Char_printf wprintf
 #endif
 /**********************Condicion if en caso de diferentes versiones utf en los archivos .xlsx*********************/
-struct docentes{
-char Codigo_curso[50];
-char Nombre_curso[50];
-int ID;
-char Nombre[50];
-char Apellido[50];
-int Bloque;
-}docente;
+
 
 int Contar_filas(xlsxioreadersheet hoja){
  int filas=0;
