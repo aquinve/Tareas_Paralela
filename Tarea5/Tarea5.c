@@ -21,6 +21,14 @@
 #define XML_Char_printf wprintf
 #endif
 /**********************Condicion if en caso de diferentes versiones utf en los archivos .xlsx*********************/
+struct docentes{
+char Codigo_curso[50];
+char Nombre_curso[50];
+int ID;
+char Nombre[50];
+char Apellido[50];
+int Bloque;
+}docente;
 
 int Contar_filas(xlsxioreadersheet hoja){
  int filas=0;
@@ -39,25 +47,30 @@ int main (int argc, char* argv[]) /*Se pasan los argumentos. El primer argumento
 Mediante el segundo argumento argv, podemos acceder a los valores de los parámetros pasados al programa, siempre el primer parámetro,
  es decir argv[0] contiene el nombre del programa.*/
 {
-  /*if (argc > 1)
-    Docentes = argv[1];
-    Salas = argv[2];
-    Cursos = argv[3];*/
+  if (argc >= 3){
+    argv[1]=Docentes;
+    argv[2]=Salas;
+    argv[3]=Cursos;}
+    else{
+    printf("No se ingresaron los 3 archivos .xlsx correspondientes (Salas.xlsx, Docentes.xlsx y Cursos.xlsx\n");
+    return 1;
+    }
+
 /*Se declaran los 3 tipos de esctrucura reader para cada archivo a utilizar */
   xlsxioreader xlsxioread_docentes; //Docentes
   xlsxioreader xlsxioread_salas; //Salas
   xlsxioreader xlsxioread_cursos; //Cursos
 
 /*********************Verificación de apertura de los archivos*********************/
-  if ((xlsxioread_docentes = xlsxioread_open(Docentes)) == NULL){ //Si el archivo esta vacio, el programa dejará de ejectuarse.
+  if ((xlsxioread_docentes = xlsxioread_open(argv[1])) == NULL){ //Si el archivo esta vacio, el programa dejará de ejectuarse.
     fprintf(stderr, "Error abriendo el archivo .xlsx\n");
     return 1;
     }
-    else if ((xlsxioread_salas=xlsxioread_open(Salas))==NULL){
+    else if ((xlsxioread_salas=xlsxioread_open(argv[2]))==NULL){
     fprintf(stderr, "Error abriendo el archivo .xlsx\n");
     return 1;
     }
-    else if ((xlsxioread_cursos=xlsxioread_open(Cursos))==NULL){
+    else if ((xlsxioread_cursos=xlsxioread_open(argv[3]))==NULL){
     fprintf(stderr, "Error abriendo el archivo .xlsx\n");
     return 1;
     }
@@ -88,7 +101,6 @@ int numero_fcursos;
   xlsxioread_sheet_close(hoja_docentes);
   xlsxioread_sheet_close(hoja_salas);
   xlsxioread_sheet_close(hoja_cursos);
-
   //Se cierran los archivos
   xlsxioread_close(xlsxioread_docentes);
   xlsxioread_close(xlsxioread_salas);
