@@ -1,49 +1,53 @@
-uso de las librerias proporcionadas por xlsx I/O
-para c las cuales permiten escribir y leer archivos de tipo xlsx
+# Tarea N°5
+
+**Forma :** Secuencial.
+Programa realizado en C que obtiene:
+- Lee ficheros en **xlsx** del proyecto semestral.
+- Cuenta filas de cada fichero.
+- Indica cuantas asignaturas tiene asignado cada docente.
+
+El proyecto semestral cuenta con archivos:
+- Cursos.xlsx
+- Docentes.xlsx
+- Salas.xlsx
 
 
+## Instalación y configuración de librerías xlsxio
 
-Instalacion:
+**PASO 1: INSTALAR LIBRERÍAS DESDE ROOT**
 
-Clonar el repositorio:
-git clone https://github.com/brechtsanders/xlsxio.git
-
-En nuestro caso hicimos un directorio donde se almacenaban
-
-% git clone https://github.com/brechtsanders/xlsxio.git xlsxio # get the code from wherever
-% mkdir xlsxio-build # prepare for an out-of-source build
-% cd xlsxio-build
-% cmake ../xlsxio
-% # at this point you'll get errors if anything's missing
-% make
-% # at this point the code will fail to build if there's e.g., a compiler error
-% su -c 'make install'
-% # installation complete; this built the examples for me and stuck them in /bin/:
-% example_xlsxio_read my_file.xlsx 
-
-instalarlo segun el readme
-dependencias mediante uso de root
-
-luego de instar esas :
-
-  configurar corriendo cmake -G"Unix Makefiles" (or cmake -G"MSYS Makefiles" on Windows) optionally followed by:
-        -DCMAKE_INSTALL_PREFIX:PATH=<path> donde se instalar las librerias
-  construir e instalar usando make instalarlo
-
-  verificar que las librerias esten en el directorio
+> sudo su
+>
+> root@ubuntu:~# apt-get install libexpat1-dev
+>
+> root@ubuntu:~# apt-get install libminizip-dev
 
 
-  En la carpeta del proyecto  ejecutar por comandoel archivo c o c++
-  en este ejemplo
-  gcc -L~/usr/local/lib/ -o test2 prueba2.c -lxlsxio_read
-  donde ~/usr/local/lib/ es donde estan las librerias
-  lxlsxio_read es la libreria de lectura.
+**PASO 2: CREAR UNA CARPETA PARA ALMACENAR EL REPOSITORIO**
 
-  probablemente en ese punto diga que no se puede abrir debemos hacer un echo
-  echo $LD_LIBRARY_PATH
-  saldra vacio hay que enviarle la ruta de las librerias
+> mkdir nombre_carpeta_xlsxio
 
-  LD_LIBRARY_PATH=/carpeta/donde/estan/librerias:$LD_LIBRARY_PATH
-  ahora exportamos los cambios.
-  export LD_LIBRARY_PATH=/carpeta/donde/estan/librerias:$LD_LIBRARY_PATH
-  y ahora podemos ejecutar
+
+**PASO 3: CLONAR REPOSITORIO EN LA CARPETA**
+
+LINK: https://github.com/brechtsanders/xlsxio.git
+
+>cd nombre_carpeta_xlsxio/
+>user@ubuntu: nombre_carpeta_xlsxio/$ git clone https://github.com/brechtsanders/xlsxio.git
+
+**PASO 4: CONFIGURAR**
+> cmake -G"Unix Makefiles"
+
+Seguido de :
+> -DCMAKE_INSTALL_PREFIX:PATH=< path >
+
+Donde < path > es la ruta base donde se instalaron los archivos.
+
+Luego:
+>make install
+
+**PASO 5: COMPILAR ARCHIVO**
+
+> user@ubuntu:/nombre_carpeta_xlsxio$ gcc Tarea5.c lib/libxlsxio_read.so lib/libxlsxio_write.so
+
+> ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
