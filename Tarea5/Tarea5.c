@@ -5,8 +5,10 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+/*Se incluyen las librerias para trabajar con archivos .xlsx, en este caso trabajamos con xlsxio write/reader*/
 #include "xlsxio_read.h"
 #include "xlsxio_write.h"
+
 
 /**********************Condicion if en caso de diferentes versiones utf en los archivos .xlsx*********************/
 #if !defined(XML_UNICODE_WCHAR_T) && !defined(XML_UNICODE)
@@ -20,85 +22,58 @@
 #endif
 /**********************Condicion if en caso de diferentes versiones utf en los archivos .xlsx*********************/
 
-int leer_filas(xlsxioreadersheet hoja){
+int Contar_filas(xlsxioreadersheet hoja){
  int filas=0;
    while (xlsxioread_sheet_next_row(hoja)) {
     filas++;
   }
-  return filas;
+  return (filas-1);
 }
 
+const char* Docentes = "Docentes.xlsx";
+const char* Salas = "Salas.xlsx";
+const char* Cursos = "Cursos.xlsx";
 
 
 int main (int argc, char* argv[]) /*Se pasan los argumentos. El primer argumento de la función argc nos indica el número total de parámetros.
 Mediante el segundo argumento argv, podemos acceder a los valores de los parámetros pasados al programa, siempre el primer parámetro,
  es decir argv[0] contiene el nombre del programa.*/
 {
-
-  const char* Docentes = "Docentes.xlsx";
-  const char* Salas = "Salas.xlsx";
-  const char* Cursos = "Cursos.xlsx";
-
-  int i=0;
-  if (argc > 1)
+  /*if (argc > 1)
     Docentes = argv[1];
     Salas = argv[2];
-    Cursos = argv[3];
-
-  xlsxioreader xlsxioread; //Estructura xlsxsio para la cabecera de leer
+    Cursos = argv[3];*/
+/*Se declaran los 3 tipos de esctrucura reader para cada archivo a utilizar */
+  xlsxioreader xlsxioread_docentes; //Docentes
+  xlsxioreader xlsxioread_salas; //Salas
+  xlsxioreader xlsxioread_cursos; //Cursos
 
 /*********************Verificación de apertura de los archivos*********************/
-#if defined(PROCESS_FROM_MEMORY)
-  {
-    //load file in memory
-    int filehandle;
-    char* buf = NULL;
-    size_t buflen = 0;
-    if ((filehandle = open(Docentes, O_RDONLY | O_BINARY)) != -1) {
-      struct stat fileinfo;
-      if (fstat(filehandle, &fileinfo) == 0) {
-        if ((buf = malloc(fileinfo.st_size)) != NULL) {
-          if (fileinfo.st_size > 0 && read(filehandle, buf, fileinfo.st_size) == fileinfo.st_size) {
-            buflen = fileinfo.st_size;
-          }
-        }
-      }
-      close(filehandle);
-    }
-    if (!buf || buflen == 0) {
-      fprintf(stderr, "Error loading .xlsx file\n");
-      return 1;
-    }
-    if ((xlsxioread = xlsxioread_open_memory(buf, buflen, 1)) == NULL) {
-      fprintf(stderr, "Error processing .xlsx data\n");
-      return 1;
-    }
-  }
-#elif defined(PROCESS_FROM_FILEHANDLE)
-  int filehandle;
-  if ((filehandle = open(Docentes, O_RDONLY | O_BINARY, 0)) == -1) {
-    fprintf(stderr, "Error opening .xlsx file\n");
-    return 1;
-  }
-  if ((xlsxioread = xlsxioread_open_filehandle(filehandle)) == NULL) {
-    fprintf(stderr, "Error reading .xlsx file\n");
-    return 1;
-  }
-#else
-  //open .xlsx file for reading
-  if ((xlsxioread = xlsxioread_open(Docentes)) == NULL) {
+  if ((xlsxioread_docentes = xlsxioread_open(Docentes)) == NULL){ //Si el archivo esta vacio, el programa dejará de ejectuarse.
     fprintf(stderr, "Error abriendo el archivo .xlsx\n");
     return 1;
-  }
-#endif
+    }
+    else if ((xlsxioread_salas=xlsxioread_open(Salas))==NULL){
+    fprintf(stderr, "Error abriendo el archivo .xlsx\n");
+    return 1;
+    }
+    else if ((xlsxioread_cursos=xlsxioread_open(Cursos))==NULL){
+    fprintf(stderr, "Error abriendo el archivo .xlsx\n");
+    return 1;
+    }
+
 /*********************Verificación de apertura de los archivos*********************/
 
+/*Declaracion de variables*/
+int numero_fdocentes;
+int numero_fsalas;
+int numero_fcursos;
 
 /***************************Lista de hojas disponibles****************************/
   xlsxioreadersheetlist Lista_hojas;
   const XLSXIOCHAR* nombre_hoja;
   printf("Hojas disponibles:\n");
-  if ((Lista_hojas = xlsxioread_sheetlist_open(xlsxioread)) != NULL) {
+  if ((Lista_hojas = xlsxioread_sheetlist_open(xlsxioread_docentes)) != NULL) {
     while ((nombre_hoja = xlsxioread_sheetlist_next(Lista_hojas)) != NULL) {
       XML_Char_printf(X(" - %s\n"), nombre_hoja);
     }
@@ -108,21 +83,29 @@ Mediante el segundo argumento argv, podemos acceder a los valores de los paráme
 /***************************Lista de hojas disponibles***************************/
 
 /*********************Lectura de datos de la primera hoja*********************/
-  //XLSXIOCHAR* value;
-  //printf("Contenidos de la primera hoja:\n");
-  xlsxioreadersheet hoja_docentes = xlsxioread_sheet_open(xlsxioread, NULL, XLSXIOREAD_SKIP_EMPTY_ROWS);
-  /*while (xlsxioread_sheet_next_row(hoja)) {
-    /*while ((value = xlsxioread_sheet_next_cell(hoja)) != NULL) {
-      XML_Char_printf(X("%s\t"), value);
-      free(value);
-    }
-    i++;
-  }*/
-  int numero_docentes = (leer_filas(hoja_docentes))-1;
-  printf("El numero de filas en el archivo docentes.xlsx es: %d\n",numero_docentes);
-  xlsxioread_sheet_close(hoja_docentes); //Cierra la hoja actual
-  //clean upz
-  xlsxioread_close(xlsxioread);
+  xlsxioreadersheet hoja_docentes = xlsxioread_sheet_open(xlsxioread_docentes, NULL, XLSXIOREAD_SKIP_EMPTY_ROWS);
+  numero_fdocentes = Contar_filas(hoja_docentes);
+  printf("El numero de filas en el archivo Docentes.xlsx es: %d\n",numero_fdocentes);
+  int Docente[numero_fdocentes];
+
+
+  xlsxioreadersheet hoja_salas = xlsxioread_sheet_open(xlsxioread_salas, NULL, XLSXIOREAD_SKIP_EMPTY_ROWS);
+  numero_fsalas = Contar_filas(hoja_salas);
+  printf("El numero de filas en el archivo Salas.xlsx es: %d\n",numero_fsalas);
+
+  xlsxioreadersheet hoja_cursos = xlsxioread_sheet_open(xlsxioread_cursos, NULL, XLSXIOREAD_SKIP_EMPTY_ROWS);
+  numero_fcursos = Contar_filas(hoja_cursos);
+  printf("El numero de filas en el archivo Cursos.xlsx es: %d\n",numero_fcursos);
+
+  //Se cierran las hojas
+  xlsxioread_sheet_close(hoja_docentes);
+  xlsxioread_sheet_close(hoja_salas);
+  xlsxioread_sheet_close(hoja_cursos);
+
+  //Se cierran los archivos
+  xlsxioread_close(xlsxioread_docentes);
+  xlsxioread_close(xlsxioread_salas);
+  xlsxioread_close(xlsxioread_cursos);
   return 0;
 }
 
