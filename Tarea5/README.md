@@ -1,7 +1,8 @@
 # Tarea N°5
 
 **Forma :** Secuencial.
-Programa realizado en C que obtiene:
+
+*Programa realizado en C que obtiene:*
 - Lee ficheros en **xlsx** del proyecto semestral.
 - Cuenta filas de cada fichero.
 - Indica cuantas asignaturas tiene asignado cada docente.
@@ -16,7 +17,7 @@ El proyecto semestral cuenta con archivos:
 
 **PASO 1: INSTALAR LIBRERÍAS DESDE ROOT**
 
-> sudo su
+> user@ubuntu: ~# sudo su
 >
 > root@ubuntu:~# apt-get install libexpat1-dev
 >
@@ -33,6 +34,7 @@ El proyecto semestral cuenta con archivos:
 LINK: https://github.com/brechtsanders/xlsxio.git
 
 >cd nombre_carpeta_xlsxio/
+>
 >user@ubuntu: nombre_carpeta_xlsxio/$ git clone https://github.com/brechtsanders/xlsxio.git
 
 **PASO 4: CONFIGURAR**
@@ -50,4 +52,4 @@ Luego:
 
 > user@ubuntu:/nombre_carpeta_xlsxio$ gcc Tarea5.c lib/libxlsxio_read.so lib/libxlsxio_write.so
 
-> ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
+> user@ubuntu:/nombre_carpeta_xlsxio$ ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
