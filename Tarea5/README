@@ -1,0 +1,40 @@
+uso de las librerias proporcionadas por xlsx I/O
+para c las cuales permiten escribir y leer archivos de tipo xlsx
+
+
+
+Instalacion:
+
+Clonar el repositorio:
+git clone https://github.com/brechtsanders/xlsxio.git
+
+En nuestro caso hicimos un directorio donde se almacenaban
+
+mkdir xlsxio-build
+
+instalarlo segun el readme
+dependencias mediante uso de root
+
+luego de instar esas :
+
+  configurar corriendo cmake -G"Unix Makefiles" (or cmake -G"MSYS Makefiles" on Windows) optionally followed by:
+        -DCMAKE_INSTALL_PREFIX:PATH=<path> donde se instalar las librerias
+  construir e instalar usando make instalarlo
+
+  verificar que las librerias esten en el directorio
+
+
+  En la carpeta del proyecto  ejecutar por comandoel archivo c o c++
+  en este ejemplo
+  gcc -L~/usr/local/lib/ -o test2 prueba2.c -lxlsxio_read
+  donde ~/usr/local/lib/ es donde estan las librerias
+  lxlsxio_read es la libreria de lectura.
+
+  probablemente en ese punto diga que no se puede abrir debemos hacer un echo
+  echo $LD_LIBRARY_PATH
+  saldra vacio hay que enviarle la ruta de las librerias
+
+  LD_LIBRARY_PATH=/carpeta/donde/estan/librerias:$LD_LIBRARY_PATH
+  ahora exportamos los cambios.
+  export LD_LIBRARY_PATH=/carpeta/donde/estan/librerias:$LD_LIBRARY_PATH
+  y ahora podemos ejecutar
