@@ -10,7 +10,16 @@ git clone https://github.com/brechtsanders/xlsxio.git
 
 En nuestro caso hicimos un directorio donde se almacenaban
 
-mkdir xlsxio-build
+% git clone https://github.com/brechtsanders/xlsxio.git xlsxio # get the code from wherever
+% mkdir xlsxio-build # prepare for an out-of-source build
+% cd xlsxio-build
+% cmake ../xlsxio
+% # at this point you'll get errors if anything's missing
+% make
+% # at this point the code will fail to build if there's e.g., a compiler error
+% su -c 'make install'
+% # installation complete; this built the examples for me and stuck them in /bin/:
+% example_xlsxio_read my_file.xlsx 
 
 instalarlo segun el readme
 dependencias mediante uso de root
