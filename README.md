@@ -86,4 +86,6 @@ Luego:
 
 **PASO 5: COMPILAR ARCHIVO**
 
-> user@ubuntu:/nombre_carpeta_xlsxio$ gcc Tarea5.c lib/libxlsxio_read.so lib/lib
+> user@ubuntu:/nombre_carpeta_xlsxio$ gcc Tarea5.c lib/libxlsxio_read.so lib/libxlsxio_write.so
+
+> ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
