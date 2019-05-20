@@ -69,19 +69,6 @@ int numero_fdocentes;
 int numero_fsalas;
 int numero_fcursos;
 
-/***************************Lista de hojas disponibles****************************/
-  xlsxioreadersheetlist Lista_hojas;
-  const XLSXIOCHAR* nombre_hoja;
-  printf("Hojas disponibles:\n");
-  if ((Lista_hojas = xlsxioread_sheetlist_open(xlsxioread_docentes)) != NULL) {
-    while ((nombre_hoja = xlsxioread_sheetlist_next(Lista_hojas)) != NULL) {
-      XML_Char_printf(X(" - %s\n"), nombre_hoja);
-    }
-    xlsxioread_sheetlist_close(Lista_hojas);
-  }
-
-/***************************Lista de hojas disponibles***************************/
-
 /*********************Lectura de datos de la primera hoja*********************/
   xlsxioreadersheet hoja_docentes = xlsxioread_sheet_open(xlsxioread_docentes, NULL, XLSXIOREAD_SKIP_EMPTY_ROWS);
   numero_fdocentes = Contar_filas(hoja_docentes);
