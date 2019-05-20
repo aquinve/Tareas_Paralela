@@ -66,7 +66,7 @@ El proyecto semestral cuenta con archivos:
 > mkdir nombre_carpeta_xlsxio
 
 
-**PASO 3: CLONAR REPOSITORIO EN LA CARPETA **
+**PASO 3: CLONAR REPOSITORIO EN LA CARPETA**
 
 LINK: https://github.com/brechtsanders/xlsxio.git
 
