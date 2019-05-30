@@ -116,7 +116,7 @@ Para agregar un usuario al grupo docker en el que no ha iniciado, declarar:
 
 > $ sudo usermod -aG docker username
 
-- Docker version 18.09.
+- Docker version 18.09.6
 
 - Docker Compose version 18.09.6
 
