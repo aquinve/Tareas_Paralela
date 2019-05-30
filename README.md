@@ -118,6 +118,4 @@ Para agregar un usuario al grupo docker en el que no ha iniciado, declarar:
 
 - Docker version 18.09.6
 
-- Docker Compose version 18.09.6
-
-
+- Docker Compose version 1.21.2
