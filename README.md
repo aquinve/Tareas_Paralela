@@ -95,4 +95,6 @@ Luego:
 
 #TAREA 6
 
-**Descripción:** Script de instalación de docker y docker compose 
+**Descripción:** Script de instalación de docker y docker compose
+
+Docker version 18.09.6
