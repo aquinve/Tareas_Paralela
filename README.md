@@ -97,4 +97,24 @@ Luego:
 
 **Descripción:** Script de instalación de docker y docker compose
 
+**Ejecutar el comando Docker sin sudo**
+
+Ejecutar el comando docker requerirá de privilegios de root, es decir, se tiene que prefijar el comando con sudo.
+
+Si intenta ejecutar el comando docker sin prefijarlo con sudo o sin estar en el grupo docker obtendrá una salida como:
+
+> docker: Cannot connect to the Docker daemon. Is the docker daemon runnin on this host?
+> See 'docker run --help'.
+
+Para evitar escribir sudo cada vez que se vaya a ejecutar el comando docker, añadir:
+
+> $ sudo usermod -aG docker $USER
+
+Cerrar la sesión y regresar como el mismo usuario para habilitar el cambio.
+
+Para agregar un usuario al grupo docker en el que no ha iniciado, declarar:
+
+> sudo usermod -aG docker username
+
 Docker version 18.09.6
+Docker Compose version 18.09.6

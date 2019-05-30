@@ -36,6 +36,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
 #-------------------------------------------------------------------------------
-#ejecución de docker sin sudo
-sudo usermod -a -G docker $USER
+echo "NOTA: Para ejecutar el comando docker sin sudo. Escribir: sudo usermod -a -G docker $USER"
 echo "FIN INSTALACION DOCKER COMPOSE"
