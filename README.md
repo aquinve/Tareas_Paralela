@@ -93,7 +93,7 @@ Luego:
 >
 > user@ubuntu:/nombre_carpeta_xlsxio$ ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
 
-#TAREA 6
+# TAREA N° 6
 
 **Descripción:** Script de instalación de docker y docker compose
 
