@@ -92,3 +92,7 @@ Luego:
 > user@ubuntu:/nombre_carpeta_xlsxio$ gcc Tarea5.c lib/libxlsxio_read.so lib/libxlsxio_write.so
 >
 > user@ubuntu:/nombre_carpeta_xlsxio$ ./a.out Salas.xlsx Docentes.xlsx Cursos.xlsx
+
+#TAREA 6
+
+**Descripción:** Script de instalación de docker y docker compose 
