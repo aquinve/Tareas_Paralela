@@ -19,7 +19,7 @@ apt-cache policy docker-ce
 sudo apt install docker-ce
 #Verifica versión
 docker --version
-echo "Ahora Docker debe estar isntalado y para comprobar que esta corriendo, debe ejecutar el siguiente comando"
+echo "Ahora Docker debe estar instalado y para comprobar que esta corriendo, debe ejecutar el siguiente comando"
 echo "sudo systemctl status docker"
 echo "FIN INSTALACION DOCKER"
 
